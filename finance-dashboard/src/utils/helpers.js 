@@ -1,0 +1,42 @@
+export const formatCurrency = (amount) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(amount);
+};
+
+export const formatDate = (date) => {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
+
+export const groupByCategory = (transactions) => {
+  return transactions.reduce((acc, transaction) => {
+    const category = transaction.category || "Other";
+    if (!acc[category]) {
+      acc[category] = { category, total: 0, count: 0 };
+    }
+    acc[category].total += transaction.amount;
+    acc[category].count += 1;
+    return acc;
+  }, {});
+};
+
+export const groupByMonth = (transactions) => {
+  return transactions.reduce((acc, transaction) => {
+    const date = new Date(transaction.date);
+    const month = date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+    });
+    if (!acc[month]) {
+      acc[month] = { month, total: 0, count: 0 };
+    }
+    acc[month].total += transaction.amount;
+    acc[month].count += 1;
+    return acc;
+  }, {});
+};

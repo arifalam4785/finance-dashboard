@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #374151;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Fade in up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out both;
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  animation: fadeInUp 0.4s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+
+/* Smooth transitions for dark mode */
+* {
+  transition-property: background-color, border-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Override for elements that need instant transitions */
+button, a, input, select {
+  transition-property: background-color, border-color, color, box-shadow, transform, opacity;
+  transition-duration: 200ms;
+}
